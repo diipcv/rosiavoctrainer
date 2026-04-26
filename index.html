@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>РУССКИЙ</title>
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d0d0d;color:#f0f0f0;font-family:Georgia,serif;min-height:100vh}
+button{font-family:Georgia,serif;cursor:pointer}
+#app{max-width:480px;margin:0 auto;padding:0 16px 40px}
+.hdr{text-align:center;padding:28px 0 16px;border-bottom:1px solid #222}
+.flag{font-size:32px;margin-bottom:4px}
+.title{font-size:30px;font-weight:900;color:#e63946;letter-spacing:6px}
+.sub1{color:#aaa;font-size:12px;margin-top:4px}
+.sub2{color:#555;font-size:11px}
+.lbl{font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase}
+.sec{margin-top:18px}
+.deck-row{display:flex;gap:8px;margin-top:8px}
+.dk{flex:1;padding:10px 4px;border-radius:8px;border:1px solid #333;background:#1a1a1a;color:#aaa;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.dk.on{border-color:#e63946;color:#e63946;background:#1a0a0a}
+.dk .ico{font-size:19px}
+.cat-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cb{padding:5px 10px;border-radius:4px;border:1px solid #333;background:#1a1a1a;color:#aaa;font-size:12px}
+.cb.on{border-color:#e63946;color:#e63946;background:#1a0a0a}
+.tog{padding:4px 12px;border-radius:20px;border:none;color:#fff;font-size:11px;font-weight:bold}
+.tog.on{background:#e63946}.tog.off{background:#333}
+.tog-row{display:flex;align-items:center;gap:10px;margin-top:8px}
+.range-wrap{display:flex;align-items:flex-end;gap:8px;margin-top:6px}
+.rbox{display:flex;flex-direction:column;align-items:center;gap:2px}
+.rbox span{font-size:10px;color:#555}
+.ri{width:52px;padding:5px 6px;background:#1a1a1a;border:1px solid #333;border-radius:6px;color:#f0f0f0;font-size:15px;text-align:center;outline:none}
+.rcount{font-size:12px;color:#666;padding-bottom:6px}
+.slider{width:100%;accent-color:#e63946;margin:6px 0}
+.slider-row{display:flex;align-items:center;gap:10px}
+.slider-row span{font-size:11px;color:#555}
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.panel{padding:14px;border-radius:8px;border:1px solid #333;background:#111}
+.ptitle{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:13px;font-weight:bold}
+.ptitle .ico{font-size:19px}
+.dir-row{display:flex;gap:6px}
+.db{flex:1;padding:8px 0;border-radius:6px;border:none;color:#fff;font-size:12px;font-weight:bold}
+.list-btn{grid-column:1/-1;padding:14px;border-radius:8px;border:1px solid #333;background:#111;color:#f0f0f0;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;font-weight:bold;width:100%}
+.pbar{height:3px;background:#222;border-radius:2px;margin-top:8px;overflow:hidden}
+.pfill{height:100%;background:#e63946;border-radius:2px}
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 0 10px}
+.back{background:none;border:none;color:#e63946;font-size:14px;padding:0}
+.cnt{font-size:12px;color:#666}
+.tag{padding:3px 8px;border-radius:3px;font-size:11px;color:#fff;font-weight:bold;background:#e63946}
+.stag{font-size:13px;color:#2d6a4f;font-weight:bold}
+.card{background:#161616;border:2px solid #2a2a2a;border-radius:12px;min-height:200px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:14px;padding:22px;text-align:center;-webkit-user-select:none;user-select:none}
+.card.fl{border-color:#e63946;background:#140a0a}
+.cnum{color:#444;font-size:12px;margin-bottom:8px}
+.cru{font-size:18px;line-height:1.5;margin-bottom:8px}
+.cja{font-size:20px;color:#e63946;font-weight:bold;line-height:1.4;margin-bottom:8px}
+.cread{font-size:11px;color:#888;font-style:italic;margin-top:4px}
+.chint{color:#444;font-size:11px;margin-top:12px}
+.cru-sm{font-size:13px;color:#888}
+.spk{background:none;border:1px solid #333;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#e63946;margin-top:12px;padding:0}
+.btn-row{display:flex;gap:10px;margin-top:14px}
+.br{flex:1;padding:12px 0;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:bold}
+.bRed{background:#c1121f}.bGrn{background:#2d6a4f}
+.bSkip{display:block;width:100%;margin-top:10px;padding:9px 0;background:none;border:1px solid #333;border-radius:8px;color:#555;font-size:13px}
+.qcard{background:#161616;border:1px solid #2a2a2a;border-radius:12px;padding:22px;margin-top:12px;text-align:center}
+.qlbl{color:#666;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.qq{font-size:16px;line-height:1.6}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.ch{padding:13px 10px;border-radius:8px;border:1px solid #2a2a2a;color:#f0f0f0;font-size:12px;line-height:1.4;background:#1e1e1e}
+.ch.ok{background:#2d6a4f}.ch.ng{background:#c1121f}
+.res{text-align:center;padding-top:44px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.remo{font-size:52px}.rtitle{font-size:24px;color:#e63946}
+.rscore{font-size:56px;font-weight:900}.rpct{font-size:16px;color:#e63946}
+.rvbox{width:100%;background:#111;border-radius:8px;padding:14px;max-height:200px;overflow-y:auto;text-align:left}
+.rvtitle{color:#e63946;font-size:12px;margin-bottom:8px;font-weight:bold}
+.rvi{border-bottom:1px solid #222;padding-bottom:7px;margin-bottom:7px}
+.rvi p{margin:1px 0;font-size:13px}
+.rvi p:last-child{color:#888;font-size:12px}
+.wbtn{padding:12px 32px;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:bold;margin-top:8px}
+.llist{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.li{background:#111;border:1px solid #222;border-radius:8px;padding:12px}
+.lih{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.licat{font-size:10px;color:#888}
+.liid{font-size:11px;color:#666}
+.liru{font-size:14px;margin:4px 0 2px}
+.lija{font-size:13px;color:#e63946;margin:0}
+.liread{font-size:11px;color:#888;font-style:italic;margin:2px 0}
+.prog-sec{margin-top:20px}
+.str{color:#ffd166;font-weight:bold;}
+
+.mis-btn{color:#f4a261!important}
+.mis-cnt{color:#f4a261;font-size:11px;margin-left:4px}
+.spk-btn{background:rgba(230,57,70,.15);border:1px solid rgba(230,57,70,.4);color:#e63946;border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;margin:8px auto;display:block;transition:all .2s}
+.spk-btn:active{background:rgba(230,57,70,.4);transform:scale(.95)}
+#pw-overlay{position:fixed;inset:0;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:16px}
+#pw-overlay .flag{font-size:40px}
+#pw-overlay h2{color:#e63946;font-size:22px;letter-spacing:4px;font-family:Georgia,serif}
+#pw-overlay .sub{font-size:11px;color:#555;letter-spacing:2px}
+#pw-overlay input{background:#1a1a1a;border:1px solid #333;color:#f0f0f0;padding:12px 20px;border-radius:8px;font-size:20px;text-align:center;width:160px;letter-spacing:6px;outline:none}
+#pw-overlay input:focus{border-color:#e63946}
+#pw-overlay button{background:transparent;border:1px solid #e63946;color:#e63946;padding:12px 32px;border-radius:8px;font-size:12px;letter-spacing:3px;font-family:Georgia,serif;cursor:pointer;text-transform:uppercase}
+#pw-overlay button:active{background:#e63946;color:#fff}
+#pw-overlay .err{color:#e63946;font-size:11px;min-height:14px}
+</style>
+</head>
+<body>
+<div id="pw-overlay">
+  <div class="flag">🇷🇺</div>
+  <h2>РУССКИЙ</h2>
+  <div class="sub">ロシア語暗記トレーナー</div>
+  <input type="password" id="pw-input" placeholder="----" maxlength="8">
+  <div class="err" id="pw-err"></div>
+  <button onclick="checkPw()">入 る</button>
+</div>
+
+<div id="app"><p style="padding:20px;color:#555">Loading...</p></div>
+<script>
+(function(){if(sessionStorage.getItem('auth')==='ok'){var o=document.getElementById('pw-overlay');if(o)o.style.display='none';}})();
+function checkPw(){var v=document.getElementById('pw-input').value;if(v==='1192'){sessionStorage.setItem('auth','ok');document.getElementById('pw-overlay').style.display='none';}else{document.getElementById('pw-err').textContent='パスワードが違います';document.getElementById('pw-input').value='';}}
+document.addEventListener('keydown',function(e){if(e.key==='Enter')checkPw();});
+
+var phrases=[
+{id:1,ru:"Дайте мне ваш адрес.",read:"ダイチェ ムニェ ヴァシュ アドリェス",ja:"住所を教えてください",cat:"日常会話",acc:"Да́йте мне ваш а́дрес."},
+{id:2,ru:"Где я могу получить багаж?",read:"グジェー ヤ マグー パルチーチ バガーシュ",ja:"荷物はどこで受け取れますか？",cat:"旅行・移動",acc:"Где я могу́ получи́ть бага́ж?"},
+{id:3,ru:"Берегитесь простуды.",read:"ビリギーチェシ プラストゥーディ",ja:"風邪に気をつけて",cat:"体・健康",acc:"Берегите́сь просту́ды."},
+{id:4,ru:"Это законно?",read:"エータ ザコーナ",ja:"これは合法ですか？",cat:"日常会話",acc:"Э́то зако́нно?"},
+{id:5,ru:"Смотри, тот магазин открыт ночью.",read:"スマトリー トット マガジーン アトクリート ノーチュ",ja:"あの店は夜も開いているよ",cat:"日常会話",acc:"Смотри́, тот магази́н откры́т но́чью."},
+{id:6,ru:"Скажите, пожалуйста, где ближайшая станция метро?",read:"スカジーチェ パジャールスタ グジェー ブリジャーイシャヤ スタンツィヤ ミトロー",ja:"最寄りの地下鉄の駅はどこですか？",cat:"旅行・移動",acc:"Скажи́те, пожа́луйста, где ближа́йшая ста́нция метро́?"},
+{id:7,ru:"Что у вас болит?",read:"シトー ウ ヴァス バリート",ja:"どこが痛いですか？",cat:"体・健康",acc:"Что у вас боли́т?"},
+{id:8,ru:"Будь здоров.",read:"ブーチ ズダロフ",ja:"お大事に／元気でね",cat:"体・健康",acc:"Будь здоро́в."},
+{id:9,ru:"Мне не везёт.",read:"ムニェー ニェ ヴィジョット",ja:"ついていない",cat:"感情・状況",acc:"Мне не везёт."},
+{id:10,ru:"Почему так происходит?",read:"パチェムー タク プライスホーヂト",ja:"なぜこうなるの？",cat:"感情・状況",acc:"Почему́ так происхо́дит?"},
+{id:11,ru:"Вы идёте вниз?",read:"ヴィ イジョーチェ ヴニース",ja:"下に行きますか？（エレベーターで）",cat:"旅行・移動",acc:"Вы идёте вниз?"},
+{id:12,ru:"Вы хорошо выглядите.",read:"ヴィ ハラショー ヴィグリャヂチェ",ja:"お元気そうですね",cat:"日常会話",acc:"Вы хорошо́ выгляди́те."},
+{id:13,ru:"Приходите ко мне в гости.",read:"プリハジーチェ カ ムニェー フ ゴースチ",ja:"遊びに来てください",cat:"日常会話",acc:"Прихо́дите ко мне в го́сти."},
+{id:14,ru:"Договорились.",read:"ダガヴァリーリシ",ja:"了解、決まりです",cat:"日常会話",acc:"Договори́лись."},
+{id:15,ru:"Я не забуду вас.",read:"ヤー ニェ ザブードゥ ヴァス",ja:"あなたのことは忘れません",cat:"感情・状況",acc:"Я не забу́ду вас."},
+{id:16,ru:"Как это использовать?",read:"カク エータ イスポーリザヴァチ",ja:"これはどう使うのですか？",cat:"日常会話",acc:"Как э́то испо́льзовать?"},
+{id:17,ru:"Всё из-за вас.",read:"フショー イズ ザ ヴァス",ja:"全部あなたのせいです",cat:"感情・状況",acc:"Всё из-за вас."},
+{id:18,ru:"Всё хорошо, что хорошо кончается.",read:"フショー ハラショー シトー ハラショー コンチャエッツァ",ja:"終わりよければすべてよし",cat:"ことわざ",acc:"Всё хорошо́, что хорошо́ конча́ется."},
+{id:19,ru:"Какая у вас группа крови?",read:"カカーヤ ウ ヴァス グルッパ クローヴィ",ja:"血液型は何ですか？",cat:"体・健康",acc:"Кака́я у вас гру́ппа кро́ви?"},
+{id:20,ru:"Я не хочу говорить о личном.",read:"ヤー ニェ ハチュー ガヴァリーチ オ リーチナム",ja:"プライベートなことは話したくない",cat:"感情・状況",acc:"Я не хочу́ говори́ть о ли́чном."},
+{id:21,ru:"На лице написано.",read:"ナ リツェー ナピーサナ",ja:"顔に書いてある（バレバレです）",cat:"感情・状況",acc:"На лице́ напи́сано."},
+{id:22,ru:"Говорите медленнее.",read:"ガヴァリーチェ メードリニェ",ja:"もっとゆっくり話してください",cat:"日常会話",acc:"Говори́те ме́дленнее."},
+{id:23,ru:"Принесите, пожалуйста, меню.",read:"プリニスィーチェ パジャールスタ ミニュー",ja:"メニューを持ってきてください",cat:"日常会話",acc:"Принеси́те, пожа́луйста, меню́."},
+{id:24,ru:"Выше головы не прыгнешь.",read:"ヴィシェ ガラヴィー ニェ プリグニシ",ja:"身の丈以上はできない",cat:"ことわざ",acc:"Вы́ше голо́вы не пры́гнешь."},
+{id:25,ru:"Давайте разделим десерт.",read:"ダヴァーイチェ ラズジェーリム ジェセールト",ja:"デザートをシェアしましょう",cat:"日常会話",acc:"Дава́йте разде́лим десе́рт."},
+{id:26,ru:"У меня к вам небольшая просьба.",read:"ウ ミニャー ク ヴァム ニボーリシャヤ プロースバ",ja:"ちょっとお願いがあります",cat:"日常会話",acc:"У меня́ к вам небольша́я про́сьба."},
+{id:27,ru:"Когда построили эту железную дорогу?",read:"カグダー パストローイリ エートゥ ジェレーズヌユ ダローグ",ja:"この鉄道はいつ建設されましたか？",cat:"旅行・移動",acc:"Когда́ постро́или э́ту желе́зную доро́гу?"},
+{id:28,ru:"Друзья познаются в беде.",read:"ドルジャー パズナーユッツァ フ ビジェー",ja:"困ったときの友が真の友",cat:"ことわざ",acc:"Друзья́ познаю́тся в беде́."},
+{id:29,ru:"Во сколько вы вчера легли?",read:"ヴァ スコーリカ ヴィ フチラー リグリー",ja:"昨夜は何時に寝ましたか？",cat:"日常会話",acc:"Во ско́лько вы вчера́ легли́?"},
+{id:30,ru:"Всё готово!",read:"フショー ガトーヴァ",ja:"準備完了！",cat:"日常会話",acc:"Всё гото́во!"},
+{id:31,ru:"Остатки сладки.",read:"アスタートキ スラートキ",ja:"残り物には福がある",cat:"ことわざ",acc:"Оста́тки сла́дки."},
+{id:32,ru:"Извините, я отнял у вас много времени.",read:"イズヴィニーチェ ヤー アトニャール ウ ヴァス ムノーガ ヴリェーミニ",ja:"お時間を取らせてすみません",cat:"日常会話",acc:"Извини́те, я отня́л у вас мно́го вре́мени."},
+{id:33,ru:"На ошибках учатся.",read:"ナ アシープカフ ウーチャッツァ",ja:"失敗から学ぶ",cat:"ことわざ",acc:"На оши́бках у́чатся."},
+{id:34,ru:"Об этом спроси у Саши.",read:"アブ エータム スプラスィー ウ サーシ",ja:"それはサーシャに聞いて",cat:"日常会話",acc:"Об э́том спроси́ у Са́ши."},
+{id:35,ru:"В жизни всё бывает.",read:"フ ジズニ フショー ビヴァエット",ja:"人生、何でもある",cat:"ことわざ",acc:"В жи́зни всё быва́ет."},
+{id:36,ru:"Нет худа без добра.",read:"ニェット フーダ ビズ ダブラー",ja:"禍福はあざなえる縄のごとし",cat:"ことわざ",acc:"Нет ху́да без добра́."},
+{id:37,ru:"Говорят, что я похож на дедушку.",read:"ガヴァリャット シトー ヤー パホーシュ ナ ジェードゥシュク",ja:"祖父に似ていると言われます",cat:"日常会話",acc:"Говоря́т, что я похо́ж на де́душку."},
+{id:38,ru:"Сходи, пожалуйста, за хлебом.",read:"スハジー パジャールスタ ザ フリェーバム",ja:"パンを買ってきてください",cat:"日常会話",acc:"Сходи́, пожа́луйста, за хле́бом."},
+{id:39,ru:"Почему вы молчите?",read:"パチェムー ヴィ モールチチェ",ja:"なぜ黙っているのですか？",cat:"日常会話",acc:"Почему́ вы молчи́те?"},
+{id:40,ru:"Сколько человек в вашей семье?",read:"スコーリカ チロヴィェーク フ ヴァーシェイ シミェー",ja:"ご家族は何人ですか？",cat:"日常会話",acc:"Ско́лько челове́к в ва́шей семье́?"},
+{id:41,ru:"Вы не туда попали.",read:"ヴィ ニェ トゥダー パパーリ",ja:"番号をお間違えです",cat:"日常会話",acc:"Вы не туда́ попа́ли."},
+{id:42,ru:"Попытка не пытка.",read:"パピートカ ニェ ピートカ",ja:"やってみるだけ損はない",cat:"ことわざ",acc:"Попы́тка не пы́тка."},
+{id:43,ru:"У меня всё в порядке.",read:"ウ ミニャー フショー フ パリャードキェ",ja:"私は大丈夫です",cat:"感情・状況",acc:"У меня́ всё в поря́дке."},
+{id:44,ru:"Волков бояться — в лес не ходить.",read:"ヴォルコフ バヤッツァ フ リェス ニェ ハジーチ",ja:"虎穴に入らずんば虎子を得ず",cat:"ことわざ",acc:"Волко́в боя́ться — в лес не ходи́ть."},
+{id:45,ru:"Дождь идёт, возьми зонт.",read:"ドーシチ イジョット ヴァズミー ゾーント",ja:"雨が降っているよ、傘を持って",cat:"日常会話",acc:"Дождь идёт, возьми́ зонт."},
+{id:46,ru:"С ним трудно найти общий язык.",read:"ス ニム トルードナ ナイチー オーブシィ ヤジーク",ja:"彼とは話が合わない",cat:"感情・状況",acc:"С ним тру́дно найти́ о́бщий язы́к."},
+{id:47,ru:"Где это продаётся?",read:"グジェー エータ プラダジョッツァ",ja:"それはどこで売っていますか？",cat:"旅行・移動",acc:"Где э́то продаётся?"},
+{id:48,ru:"Какой размер вам нужен?",read:"カコーイ ラズミェール ヴァム ヌージェン",ja:"サイズは何が必要ですか？",cat:"旅行・移動",acc:"Како́й разме́р вам ну́жен?"},
+{id:49,ru:"Где вы пропадали?",read:"グジェー ヴィ プラパダーリ",ja:"どこへ行っていたのですか？",cat:"日常会話",acc:"Где вы пропада́ли?"},
+{id:50,ru:"Кто вы по профессии?",read:"クトー ヴィ パ プラフィェーシィ",ja:"ご職業は何ですか？",cat:"日常会話",acc:"Кто вы по профе́ссии?"},
+{id:51,ru:"Кто понял, поднимите руку.",read:"クトー ポーニャル パドニミーチェ ルーク",ja:"わかった人は手を挙げてください",cat:"日常会話",acc:"Кто по́нял, подними́те ру́ку."},
+{id:52,ru:"Счастливого пути!",read:"シャスリーヴァヴァ プチー",ja:"良い旅を！",cat:"旅行・移動",acc:"Сча́стливого пути́!"},
+{id:53,ru:"Повторите, пожалуйста, ещё раз.",read:"パフタリーチェ パジャールスタ イショー ラース",ja:"もう一度繰り返してください",cat:"日常会話",acc:"Повтори́те, пожа́луйста, ещё раз."},
+{id:54,ru:"С кем я говорю?",read:"ス キェーム ヤー ガヴァリュー",ja:"どちら様ですか？（電話で）",cat:"日常会話",acc:"С кем я говорю́?"},
+{id:55,ru:"Вы свободны сегодня вечером?",read:"ヴィ スヴァボードニ スィヴォードニャ ヴィェーチェラム",ja:"今夜は空いていますか？",cat:"日常会話",acc:"Вы свобо́дны сего́дня ве́чером?"},
+{id:56,ru:"Я был на седьмом небе.",read:"ヤー ビル ナ スィドモム ニェービェ",ja:"天にも昇る気持ちでした",cat:"感情・状況",acc:"Я был на седьмо́м не́бе."},
+{id:57,ru:"Мы думали так же.",read:"ミー ドゥーマリ タク ジェ",ja:"私たちも同じように思っていました",cat:"日常会話",acc:"Мы ду́мали так же."},
+{id:58,ru:"Где карта метро?",read:"グジェー カールタ ミトロー",ja:"地下鉄の路線図はどこですか？",cat:"旅行・移動",acc:"Где ка́рта метро́?"},
+{id:59,ru:"Совершенно верно.",read:"サヴィルシェンナ ヴィェールナ",ja:"まったくその通りです",cat:"日常会話",acc:"Соверше́нно ве́рно."},
+{id:60,ru:"Я видел его лицо отчётливо со своего места.",read:"ヤー ヴィジェル イヴォー リツォー アチョトリヴァ サ スヴァイヴォー ミェースタ",ja:"自分の席から彼の顔がはっきり見えました",cat:"日常会話",acc:"Я ви́дел его́ лицо́ отчётливо со своего́ ме́ста."},
+{id:61,ru:"С какой целью вы приехали?",read:"ス カコーイ ツェーリュ ヴィ プリイェーハリ",ja:"何の目的で来ましたか？",cat:"旅行・移動",acc:"С како́й це́лью вы прие́хали?"},
+{id:62,ru:"Старость — не радость.",read:"スターラスチ ニェ ラーダスチ",ja:"老いは喜びではない",cat:"ことわざ",acc:"Ста́рость — не ра́дость."},
+{id:63,ru:"Этот столик свободен?",read:"エータト ストーリク スヴァボーデン",ja:"このテーブルは空いていますか？",cat:"旅行・移動",acc:"Э́тот сто́лик свобо́ден?"},
+{id:64,ru:"Хорошо, что зима была тёплая.",read:"ハラショー シトー ズィマー ビラー チョープラヤ",ja:"冬が暖かくて良かった",cat:"日常会話",acc:"Хорошо́, что зима́ была́ тёплая."},
+{id:65,ru:"Ему всё быстро надоедает.",read:"イムー フショー ビーストラ ナダイダジョット",ja:"彼はすぐ何でも飽きる",cat:"感情・状況",acc:"Ему́ всё бы́стро надоеда́ет."},
+{id:66,ru:"Сколько с меня?",read:"スコーリカ ス ミニャー",ja:"いくらですか？（お会計）",cat:"旅行・移動",acc:"Ско́лько с меня́?"},
+{id:67,ru:"Давайте возьмём такси.",read:"ダヴァーイチェ ヴァズミョム タクシー",ja:"タクシーにしましょう",cat:"旅行・移動",acc:"Дава́йте возьмём такси́."},
+{id:68,ru:"Сколько листов бумаги вы хотите?",read:"スコーリカ リストフ ブマーギ ヴィ ハチーチェ",ja:"紙は何枚必要ですか？",cat:"日常会話",acc:"Ско́лько листо́в бума́ги вы хоти́те?"},
+{id:69,ru:"Я помню время, но забыл число.",read:"ヤー ポームニュ ヴリェーミャ ノー ザビール チスロー",ja:"時間は覚えているが、日付を忘れた",cat:"日常会話",acc:"Я по́мню вре́мя, но забы́л число́."},
+{id:70,ru:"Тише едешь, дальше будешь.",read:"チーシェ イェーデシ ダーリシェ ブーデシ",ja:"急がば回れ",cat:"ことわざ",acc:"Ти́ше е́дешь, да́льше бу́дешь."},
+{id:71,ru:"Что будет, то и будет.",read:"シトー ブーデット トー イ ブーデット",ja:"なるようになる",cat:"ことわざ",acc:"Что бу́дет, то и бу́дет."},
+{id:72,ru:"Я сейчас приду.",read:"ヤー スィチャース プリドゥー",ja:"すぐ行きます",cat:"日常会話",acc:"Я сейча́с приду́."},
+{id:73,ru:"Как я ни стараюсь, всё не успеваю.",read:"カク ヤー ニ スタラーユシ フショー ニェ ウスピヴァーユ",ja:"どんなに頑張っても間に合わない",cat:"感情・状況",acc:"Как я ни стара́юсь, всё не успева́ю."},
+{id:74,ru:"Можно включить музыку, пока вы работаете.",read:"モージュナ フクリュチーチ ムーズィク パカー ヴィ ラボータイチェ",ja:"仕事中に音楽をかけてもいいですか？",cat:"日常会話",acc:"Мо́жно включи́ть му́зыку, пока́ вы рабо́таете."},
+{id:75,ru:"Язык мой — враг мой.",read:"ヤジーク モイ ヴラーク モイ",ja:"口は禍の元",cat:"ことわざ",acc:"Язы́к мой — враг мой."},
+{id:76,ru:"Вкусно, но чего-то не хватает.",read:"フクースナ ノー チヴォータ ニェ フヴァタエット",ja:"おいしいけど、何かが足りない",cat:"日常会話",acc:"Вку́сно, но чего́-то не хвата́ет."},
+{id:77,ru:"Есть две вещи, на которые нельзя жалеть деньги: кровать и обувь.",read:"イェースチ ドヴィェー ヴィェーシィ ナ カトーリエ ニリズャー ジャリェーチ ジェーニギ クラヴァーチ イ オーブフ",ja:"お金を惜しんではいけないものが二つある：ベッドと靴",cat:"ことわざ",acc:"Есть две ве́щи, на кото́рые нельзя́ жале́ть де́ньги: крова́ть и о́бувь."}
+];
+var greetings=[
+{id:"g1",ru:"Здравствуйте!",read:"ズドラーストヴィチェ",ja:"こんにちは（丁寧）",acc:"Здра́вствуйте!"},
+{id:"g2",ru:"Привет!",read:"プリヴィェット",ja:"やあ／こんにちは（カジュアル）",acc:"Приве́т!"},
+{id:"g3",ru:"Доброе утро!",read:"ドーブラエ ウートラ",ja:"おはようございます",acc:"До́брое у́тро!"},
+{id:"g4",ru:"Добрый день!",read:"ドーブリイ ジェーニ",ja:"こんにちは",acc:"До́брый день!"},
+{id:"g5",ru:"Добрый вечер!",read:"ドーブリイ ヴィェーチェル",ja:"こんばんは",acc:"До́брый ве́чер!"},
+{id:"g6",ru:"До свидания.",read:"ダスヴィダーニャ",ja:"さようなら／失礼します",acc:"До свида́ния."},
+{id:"g7",ru:"Пока.",read:"パカー",ja:"バイバイ／じゃあね",acc:"Пока́."},
+{id:"g8",ru:"До встречи.",read:"ダ フストリェーチ",ja:"また会いましょう／またね",acc:"До встре́чи."},
+{id:"g9",ru:"Спасибо.",read:"スパシーバ",ja:"ありがとう／ありがとうございます",acc:"Спаси́бо."},
+{id:"g10",ru:"Пожалуйста!",read:"パジャールスタ",ja:"どういたしまして／お願いします",acc:"Пожа́луйста!"},
+{id:"g11",ru:"Извините.",read:"イズヴィニーチェ",ja:"すみません／ごめんなさい",acc:"Извини́те."},
+{id:"g12",ru:"Ничего.",read:"ニチヴォー",ja:"いいえ、大丈夫です／気にしないで",acc:"Ничего́."},
+{id:"g13",ru:"Можно?",read:"モージュナ",ja:"してもいいですか？",acc:"Мо́жно?"},
+{id:"g14",ru:"Вы не знаете?",read:"ヴィ ニェ ズナーイチェ",ja:"ご存じありませんか？",acc:"Вы не зна́ете?"},
+{id:"g15",ru:"Я не знаю.",read:"ヤー ニェ ズナーユ",ja:"知りません",acc:"Я не зна́ю."},
+{id:"g16",ru:"Скажите, пожалуйста.",read:"スカジーチェ パジャールスタ",ja:"すみません、教えてください",acc:"Скажи́те, пожа́луйста."},
+{id:"g17",ru:"Повторите, пожалуйста.",read:"パフタリーチェ パジャールスタ",ja:"もう一度言ってください",acc:"Повтори́те, пожа́луйста."},
+{id:"g18",ru:"Передайте, пожалуйста.",read:"ピリダイチェ パジャールスタ",ja:"渡してください",acc:"Переда́йте, пожа́луйста."},
+{id:"g19",ru:"Дайте, пожалуйста.",read:"ダイチェ パジャールスタ",ja:"ください",acc:"Да́йте, пожа́луйста."},
+{id:"g20",ru:"Покажите, пожалуйста.",read:"パカジーチェ パジャールスタ",ja:"見せてください",acc:"Покажи́те, пожа́луйста."}
+];
+var vocab=[
+{id:"v1",ru:"январь",read:"ヤンヴァーリ",ja:"1月",cat:"月",acc:"янва́рь"},{id:"v2",ru:"февраль",read:"フィヴラーリ",ja:"2月",cat:"月",acc:"февра́ль"},
+{id:"v3",ru:"март",read:"マールト",ja:"3月",cat:"月",acc:"март"},{id:"v4",ru:"апрель",read:"アプリェーリ",ja:"4月",cat:"月",acc:"апре́ль"},
+{id:"v5",ru:"май",read:"マイ",ja:"5月",cat:"月",acc:"май"},{id:"v6",ru:"июнь",read:"イユーニ",ja:"6月",cat:"月",acc:"ию́нь"},
+{id:"v7",ru:"июль",read:"イユーリ",ja:"7月",cat:"月",acc:"ию́ль"},{id:"v8",ru:"август",read:"アーフグスト",ja:"8月",cat:"月",acc:"а́вгуст"},
+{id:"v9",ru:"сентябрь",read:"スィンチャーブリ",ja:"9月",cat:"月",acc:"сентя́брь"},{id:"v10",ru:"октябрь",read:"アクチャーブリ",ja:"10月",cat:"月",acc:"октя́брь"},
+{id:"v11",ru:"ноябрь",read:"ナヤーブリ",ja:"11月",cat:"月",acc:"ноя́брь"},{id:"v12",ru:"декабрь",read:"ジカーブリ",ja:"12月",cat:"月",acc:"дека́брь"},
+{id:"v13",ru:"число",read:"チスロー",ja:"日付",cat:"曜日",acc:"число́"},{id:"v14",ru:"день",read:"ジェーニ",ja:"日・日中",cat:"曜日",acc:"день"},
+{id:"v15",ru:"дни недели",read:"ドニ ニジェーリ",ja:"曜日",cat:"曜日",acc:"дни неде́ли"},{id:"v16",ru:"неделя",read:"ニジェーリャ",ja:"週",cat:"曜日",acc:"неде́ля"},
+{id:"v17",ru:"понедельник",read:"パニジェーリニク",ja:"月曜日",cat:"曜日",acc:"понеде́льник"},{id:"v18",ru:"вторник",read:"フトールニク",ja:"火曜日",cat:"曜日",acc:"вто́рник"},
+{id:"v19",ru:"среда",read:"スリダー",ja:"水曜日",cat:"曜日",acc:"среда́"},{id:"v20",ru:"четверг",read:"チトヴィェールク",ja:"木曜日",cat:"曜日",acc:"четве́рг"},
+{id:"v21",ru:"пятница",read:"ピャートニツァ",ja:"金曜日",cat:"曜日",acc:"пя́тница"},{id:"v22",ru:"суббота",read:"スボータ",ja:"土曜日",cat:"曜日",acc:"суббо́та"},
+{id:"v23",ru:"воскресенье",read:"ヴァスクリスィェーニェ",ja:"日曜日",cat:"曜日",acc:"воскресе́нье"},{id:"v24",ru:"Когда?",read:"カグダー",ja:"いつ？",cat:"曜日",acc:"Когда́?"},
+{id:"v25",ru:"в понедельник",read:"フ パニジェーリニク",ja:"月曜日に",cat:"曜日",acc:"в понеде́льник"},{id:"v26",ru:"во вторник",read:"ヴァ フトールニク",ja:"火曜日に",cat:"曜日",acc:"во вто́рник"},
+{id:"v27",ru:"в среду",read:"フ スリェードゥ",ja:"水曜日に",cat:"曜日",acc:"в сре́ду"},{id:"v28",ru:"в четверг",read:"フ チトヴィェールク",ja:"木曜日に",cat:"曜日",acc:"в четве́рг"},
+{id:"v29",ru:"в пятницу",read:"フ ピャートニツ",ja:"金曜日に",cat:"曜日",acc:"в пя́тницу"},{id:"v30",ru:"в субботу",read:"フ スボートゥ",ja:"土曜日に",cat:"曜日",acc:"в суббо́ту"},
+{id:"v31",ru:"в воскресенье",read:"フ ヴァスクリスィェーニェ",ja:"日曜日に",cat:"曜日",acc:"в воскресе́нье"},
+{id:"v32",ru:"люди",read:"リューヂ",ja:"人々",cat:"人・家族",acc:"лю́ди"},{id:"v33",ru:"парень",read:"パーリニ",ja:"男の子",cat:"人・家族",acc:"па́рень"},
+{id:"v34",ru:"девушка",read:"ジェーヴシュカ",ja:"女の子",cat:"人・家族",acc:"де́вушка"},{id:"v35",ru:"мужчина",read:"ムシチーナ",ja:"男性",cat:"人・家族",acc:"мужчи́на"},
+{id:"v36",ru:"человек",read:"チロヴィェーク",ja:"人",cat:"人・家族",acc:"челове́к"},{id:"v37",ru:"женщина",read:"ジェーンシナ",ja:"女性",cat:"人・家族",acc:"же́нщина"},
+{id:"v38",ru:"мальчик",read:"マーリチク",ja:"男の子",cat:"人・家族",acc:"ма́льчик"},{id:"v39",ru:"девочка",read:"ジェーヴァチカ",ja:"女の子",cat:"人・家族",acc:"де́вочка"},
+{id:"v40",ru:"семья",read:"スィミャー",ja:"家族",cat:"人・家族",acc:"семья́"},{id:"v41",ru:"брат",read:"ブラート",ja:"兄弟",cat:"人・家族",acc:"брат"},
+{id:"v42",ru:"дети",read:"ジェーチ",ja:"子どもたち",cat:"人・家族",acc:"де́ти"},{id:"v43",ru:"дочь",read:"ドーチ",ja:"娘",cat:"人・家族",acc:"дочь"},
+{id:"v44",ru:"отец",read:"アチェーツ",ja:"父",cat:"人・家族",acc:"оте́ц"},{id:"v45",ru:"внучка",read:"ヴヌーチカ",ja:"孫娘",cat:"人・家族",acc:"вну́чка"},
+{id:"v46",ru:"дедушка",read:"ジェードゥシュカ",ja:"祖父",cat:"人・家族",acc:"де́душка"},{id:"v47",ru:"бабушка",read:"バーブシュカ",ja:"祖母",cat:"人・家族",acc:"ба́бушка"},
+{id:"v48",ru:"внук",read:"ヴヌーク",ja:"孫息子",cat:"人・家族",acc:"вну́к"},{id:"v49",ru:"муж",read:"ムーシュ",ja:"夫",cat:"人・家族",acc:"муж"},
+{id:"v50",ru:"мать",read:"マーチ",ja:"母",cat:"人・家族",acc:"мать"},{id:"v51",ru:"родители",read:"ラジーチェリ",ja:"両親",cat:"人・家族",acc:"роди́тели"},
+{id:"v52",ru:"сестра",read:"スィストラー",ja:"姉妹",cat:"人・家族",acc:"сестра́"},{id:"v53",ru:"сын",read:"スィーン",ja:"息子",cat:"人・家族",acc:"сын"},
+{id:"v54",ru:"жена",read:"ジナー",ja:"妻",cat:"人・家族",acc:"жена́"}
+];
+var numbers=[
+{id:"n1",ru:"один",read:"アジーン",ja:"1",cat:"1〜20",acc:"оди́н"},{id:"n2",ru:"два",read:"ドヴァー",ja:"2",cat:"1〜20",acc:"два"},
+{id:"n3",ru:"три",read:"トリー",ja:"3",cat:"1〜20",acc:"три"},{id:"n4",ru:"четыре",read:"チトィーリェ",ja:"4",cat:"1〜20",acc:"четы́ре"},
+{id:"n5",ru:"пять",read:"ピャーチ",ja:"5",cat:"1〜20",acc:"пять"},{id:"n6",ru:"шесть",read:"シェースチ",ja:"6",cat:"1〜20",acc:"шесть"},
+{id:"n7",ru:"семь",read:"スィェーミ",ja:"7",cat:"1〜20",acc:"семь"},{id:"n8",ru:"восемь",read:"ヴォースィェミ",ja:"8",cat:"1〜20",acc:"во́семь"},
+{id:"n9",ru:"девять",read:"ジェーヴィチ",ja:"9",cat:"1〜20",acc:"де́вять"},{id:"n10",ru:"десять",read:"ジェースィチ",ja:"10",cat:"1〜20",acc:"де́сять"},
+{id:"n11",ru:"одиннадцать",read:"アジーナッツァチ",ja:"11",cat:"1〜20",acc:"оди́ннадцать"},{id:"n12",ru:"двенадцать",read:"ドヴィナッツァチ",ja:"12",cat:"1〜20",acc:"двена́дцать"},
+{id:"n13",ru:"тринадцать",read:"トリナッツァチ",ja:"13",cat:"1〜20",acc:"трина́дцать"},{id:"n14",ru:"четырнадцать",read:"チトィルナッツァチ",ja:"14",cat:"1〜20",acc:"четы́рнадцать"},
+{id:"n15",ru:"пятнадцать",read:"ピトナッツァチ",ja:"15",cat:"1〜20",acc:"пятна́дцать"},{id:"n16",ru:"шестнадцать",read:"シスナッツァチ",ja:"16",cat:"1〜20",acc:"шестна́дцать"},
+{id:"n17",ru:"семнадцать",read:"スィムナッツァチ",ja:"17",cat:"1〜20",acc:"семна́дцать"},{id:"n18",ru:"восемнадцать",read:"ヴァスィムナッツァチ",ja:"18",cat:"1〜20",acc:"восемна́дцать"},
+{id:"n19",ru:"девятнадцать",read:"ジヴィトナッツァチ",ja:"19",cat:"1〜20",acc:"девятна́дцать"},{id:"n20",ru:"двадцать",read:"ドヴァッツァチ",ja:"20",cat:"1〜20",acc:"два́дцать"},
+{id:"n30",ru:"тридцать",read:"トリッツァチ",ja:"30",cat:"十の位",acc:"три́дцать"},{id:"n40",ru:"сорок",read:"ソーラク",ja:"40",cat:"十の位",acc:"со́рок"},
+{id:"n50",ru:"пятьдесят",read:"ピジスャート",ja:"50",cat:"十の位",acc:"пятьдеся́т"},{id:"n60",ru:"шестьдесят",read:"シスジスャート",ja:"60",cat:"十の位",acc:"шестьдеся́т"},
+{id:"n70",ru:"семьдесят",read:"スィェムジスャート",ja:"70",cat:"十の位",acc:"се́мьдесят"},{id:"n80",ru:"восемьдесят",read:"ヴォースィミジスャート",ja:"80",cat:"十の位",acc:"во́семьдесят"},
+{id:"n90",ru:"девяносто",read:"ジヴィノーサタ",ja:"90",cat:"十の位",acc:"девяно́сто"},{id:"n100",ru:"сто",read:"ストー",ja:"100",cat:"十の位",acc:"сто"},
+{id:"n21",ru:"двадцать один",read:"ドヴァッツァチ アジーン",ja:"21",cat:"組み合わせ例",acc:"два́дцать оди́н"},
+{id:"n32",ru:"тридцать два",read:"トリッツァチ ドヴァー",ja:"32",cat:"組み合わせ例",acc:"три́дцать два"},
+{id:"n45",ru:"сорок пять",read:"ソーラク ピャーチ",ja:"45",cat:"組み合わせ例",acc:"со́рок пять"},
+{id:"n56",ru:"пятьдесят шесть",read:"ピジスャート シェースチ",ja:"56",cat:"組み合わせ例",acc:"пятьдеся́т шесть"},
+{id:"n67",ru:"шестьдесят семь",read:"シスジスャート スィェーミ",ja:"67",cat:"組み合わせ例",acc:"шестьдеся́т семь"},
+{id:"n78",ru:"семьдесят восемь",read:"スィェムジスャート ヴォースィェミ",ja:"78",cat:"組み合わせ例",acc:"се́мьдесят во́семь"},
+{id:"n99",ru:"девяносто девять",read:"ジヴィノーサタ ジェーヴィチ",ja:"99",cat:"組み合わせ例",acc:"девяно́сто де́вять"}
+];
+
+var school=[
+{id:"s1",ru:"аудитория",acc:"аудито́рия",read:"アウジトーリヤ",ja:"教室（大学）",cat:"教室・建物"},
+{id:"s2",ru:"класс",acc:"кла́сс",read:"クラース",ja:"教室",cat:"教室・建物"},
+{id:"s3",ru:"кабинет",acc:"кабине́т",read:"カビニェート",ja:"教室・研究室",cat:"教室・建物"},
+{id:"s4",ru:"здание",acc:"зда́ние",read:"ズダーニェ",ja:"建物",cat:"教室・建物"},
+{id:"s5",ru:"этаж",acc:"эта́ж",read:"エターシュ",ja:"階",cat:"教室・建物"},
+{id:"s6",ru:"коридор",acc:"коридо́р",read:"カリドール",ja:"廊下",cat:"教室・建物"},
+{id:"s7",ru:"вход",acc:"вхо́д",read:"フホート",ja:"入り口",cat:"教室・建物"},
+{id:"s8",ru:"выход",acc:"вы́ход",read:"ヴィハット",ja:"出口",cat:"教室・建物"},
+{id:"s9",ru:"стол",acc:"сто́л",read:"ストール",ja:"机・テーブル",cat:"家具"},
+{id:"s10",ru:"стул",acc:"сту́л",read:"ストゥール",ja:"椅子",cat:"家具"},
+{id:"s11",ru:"парта",acc:"па́рта",read:"パールタ",ja:"学習机",cat:"家具"},
+{id:"s12",ru:"кафедра",acc:"кафе́дра",read:"カフィェードラ",ja:"教壇・学科",cat:"家具"},
+{id:"s13",ru:"доска",acc:"доска́",read:"ダスカー",ja:"黒板",cat:"家具"},
+{id:"s14",ru:"окно",acc:"окно́",read:"アクノー",ja:"窓",cat:"家具"},
+{id:"s15",ru:"дверь",acc:"дверь",read:"ドヴィェーリ",ja:"ドア",cat:"家具"},
+{id:"s16",ru:"стена",acc:"стена́",read:"スティナー",ja:"壁",cat:"家具"},
+{id:"s17",ru:"пол",acc:"пол",read:"ポール",ja:"床",cat:"家具"},
+{id:"s18",ru:"потолок",acc:"потоло́к",read:"パタロック",ja:"天井",cat:"家具"},
+{id:"s19",ru:"шкаф",acc:"шкаф",read:"シュカーフ",ja:"ロッカー・棚",cat:"家具"},
+{id:"s20",ru:"полка",acc:"по́лка",read:"ポールカ",ja:"棚",cat:"家具"},
+{id:"s21",ru:"вешалка",acc:"ве́шалка",read:"ヴィェーシャルカ",ja:"ハンガー",cat:"家具"},
+{id:"s22",ru:"часы",acc:"часы́",read:"チャスィー",ja:"時計",cat:"家具"},
+{id:"s23",ru:"телевизор",acc:"телеви́зор",read:"チリヴィーザル",ja:"テレビ",cat:"機材"},
+{id:"s24",ru:"компьютер",acc:"компью́тер",read:"カンピューテル",ja:"コンピューター",cat:"機材"},
+{id:"s25",ru:"ноутбук",acc:"но́утбук",read:"ノウトブック",ja:"ノートパソコン",cat:"機材"},
+{id:"s26",ru:"планшет",acc:"планше́т",read:"プランシェット",ja:"タブレット",cat:"機材"},
+{id:"s27",ru:"проектор",acc:"прое́ктор",read:"プラエークタル",ja:"プロジェクター",cat:"機材"},
+{id:"s28",ru:"экран",acc:"экра́н",read:"エクラーン",ja:"スクリーン",cat:"機材"},
+{id:"s29",ru:"колонка",acc:"коло́нка",read:"カローンカ",ja:"スピーカー",cat:"機材"},
+{id:"s30",ru:"наушники",acc:"нау́шники",read:"ナウーシュニキ",ja:"ヘッドホン",cat:"機材"},
+{id:"s31",ru:"микрофон",acc:"микрофо́н",read:"ミクラフォーン",ja:"マイク",cat:"機材"},
+{id:"s32",ru:"камера",acc:"ка́мера",read:"カーミラ",ja:"カメラ",cat:"機材"},
+{id:"s33",ru:"книга",acc:"кни́га",read:"クニーガ",ja:"本",cat:"教材・道具"},
+{id:"s34",ru:"учебник",acc:"уче́бник",read:"ウチェーブニク",ja:"教科書",cat:"教材・道具"},
+{id:"s35",ru:"тетрадь",acc:"тетра́дь",read:"チトラーチ",ja:"ノート",cat:"教材・道具"},
+{id:"s36",ru:"ручка",acc:"ру́чка",read:"ルーチカ",ja:"ペン",cat:"教材・道具"},
+{id:"s37",ru:"карандаш",acc:"каранда́ш",read:"カランダーシュ",ja:"鉛筆",cat:"教材・道具"},
+{id:"s38",ru:"ластик",acc:"ла́стик",read:"ラースチク",ja:"消しゴム",cat:"教材・道具"},
+{id:"s39",ru:"маркер",acc:"ма́ркер",read:"マールキル",ja:"マーカー",cat:"教材・道具"},
+{id:"s40",ru:"мел",acc:"мел",read:"ミェール",ja:"チョーク",cat:"教材・道具"},
+{id:"s41",ru:"пенал",acc:"пена́л",read:"ピナール",ja:"筆箱",cat:"教材・道具"},
+{id:"s42",ru:"рюкзак",acc:"рюкза́к",read:"リュクザーク",ja:"リュック",cat:"教材・道具"},
+{id:"s43",ru:"бумага",acc:"бума́га",read:"ブマーガ",ja:"紙",cat:"教材・道具"},
+{id:"s44",ru:"лист",acc:"лист",read:"リースト",ja:"紙（1枚）",cat:"教材・道具"},
+{id:"s45",ru:"словарь",acc:"слова́рь",read:"スラヴァーリ",ja:"辞書",cat:"教材・道具"},
+{id:"s46",ru:"линейка",acc:"лине́йка",read:"リニェーイカ",ja:"定規",cat:"教材・道具"},
+{id:"s47",ru:"клей",acc:"клей",read:"クリェーイ",ja:"のり",cat:"教材・道具"},
+{id:"s48",ru:"ножницы",acc:"но́жницы",read:"ノージュニツィ",ja:"はさみ",cat:"教材・道具"},
+{id:"s49",ru:"степлер",acc:"сте́плер",read:"ステープリル",ja:"ホチキス",cat:"教材・道具"},
+{id:"s50",ru:"скрепка",acc:"скре́пка",read:"スクリェープカ",ja:"クリップ",cat:"教材・道具"},
+{id:"s51",ru:"преподаватель",acc:"преподава́тель",read:"プリパダヴァーチェリ",ja:"先生（大学）",cat:"人"},
+{id:"s52",ru:"учитель",acc:"учи́тель",read:"ウチーチェリ",ja:"先生（学校）",cat:"人"},
+{id:"s53",ru:"студент",acc:"студе́нт",read:"ストゥジェーント",ja:"学生（男性）",cat:"人"},
+{id:"s54",ru:"студентка",acc:"студе́нтка",read:"ストゥジェーントカ",ja:"学生（女性）",cat:"人"},
+{id:"s55",ru:"ученик",acc:"уче́ник",read:"ウチェーニク",ja:"生徒（男性）",cat:"人"},
+{id:"s56",ru:"ученица",acc:"учени́ца",read:"ウチニーツァ",ja:"生徒（女性）",cat:"人"},
+{id:"s57",ru:"группа",acc:"гру́ппа",read:"グルッパ",ja:"グループ",cat:"人"},
+{id:"s58",ru:"одногруппник",acc:"одногру́ппник",read:"アドナグルップニク",ja:"クラスメート",cat:"人"},
+{id:"s59",ru:"однокурсник",acc:"одноку́рсник",read:"アドナクールスニク",ja:"同級生",cat:"人"},
+{id:"s60",ru:"стол преподавателя",acc:"стол преподава́теля",read:"ストール プリパダヴァーチェリャ",ja:"先生の机",cat:"家具"},
+{id:"s61",ru:"карта России",acc:"ка́рта Росси́и",read:"カールタ ラシーイ",ja:"ロシアの地図",cat:"教材・道具"}
+];
+var C77=['すべて','日常会話','旅行・移動','体・健康','感情・状況','ことわざ'];
+var CV=['すべて','月','曜日','人・家族'];
+var CN=['すべて','1〜20','十の位','組み合わせ例'];
+var CS=['すべて','教室・建物','家具','機材','教材・道具','人'];
+var DK=[{k:'phrases',l:'77文',i:'📖'},{k:'greetings',l:'日常挨拶',i:'👋'},{k:'vocab',l:'月・曜日・人',i:'📅'},{k:'numbers',l:'1〜100',i:'🔢'},{k:'school',l:'教室・学校',i:'🏫'}];
+var PR=[{l:'1〜35',f:1,t:35},{l:'36〜77',f:36,t:77},{l:'1〜77',f:1,t:77}];
+var TOT=phrases.length+greetings.length+vocab.length+numbers.length+school.length;
+var _mis=[];try{var _raw=localStorage.getItem('ruMistakes');if(_raw)_mis=JSON.parse(_raw);}catch(e){}
+var S={mode:'menu',dt:'phrases',cat:'すべて',sr:true,sh:true,rf:'1',rt:'77',deck:[],idx:0,flip:false,known:[],qQ:null,qA:null,sc:{c:0,t:0},qm:'ru2ja',fd:'ru2ja',rev:[],rate:0.5,mistakes:_mis};
+function saveMistakes(){try{localStorage.setItem('ruMistakes',JSON.stringify(S.mistakes));}catch(e){}}
+function addMistake(c){var id=String(c.id)+':'+c.ru;if(!S.mistakes.find(function(m){return (String(m.id)+':'+m.ru)===id;})){S.mistakes.push(c);saveMistakes();}}
+function removeMistake(id,ru){S.mistakes=S.mistakes.filter(function(m){return !(String(m.id)===String(id)&&m.ru===ru);});saveMistakes();}
+function esc(s){return String(s).replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/"/g,'"');}
+function disp(c){var t=c.acc||c.ru,r='',i,ch;for(i=0;i<t.length;i++){ch=t[i];if(t[i+1]==='́'){r+='<span class='+'"str"'+'>'+esc(ch)+'</span>';i++;}else{r+=esc(ch);}}return r;}
+function shuf(a){var b=a.slice(),i=b.length,j,t;while(i--){j=Math.floor(Math.random()*(i+1));t=b[i];b[i]=b[j];b[j]=t;}return b;}
+function rf(){return Math.max(1,Math.min(parseInt(S.rf)||1,77));}
+function rt(){return Math.max(rf(),Math.min(parseInt(S.rt)||77,77));}
+function filt(){var f,r=rf(),t=rt();if(S.dt==='phrases'){f=S.cat==='すべて'?phrases:phrases.filter(function(p){return p.cat===S.cat;});return f.filter(function(p){return p.id>=r&&p.id<=t;});}if(S.dt==='greetings')return greetings;if(S.dt==='school'){return S.cat==='すべて'?school:school.filter(function(p){return p.cat===S.cat;});}var pool=S.dt==='numbers'?numbers:vocab;return S.cat==='すべて'?pool:pool.filter(function(p){return p.cat===S.cat;});}
+function pool(){return S.dt==='phrases'?phrases:S.dt==='greetings'?greetings:S.dt==='numbers'?numbers:S.dt==='school'?school:vocab;}
+function spd(r){return r<=0.4?'超遅い':r<=0.6?'遅い':r<=0.9?'普通':r<=1.2?'速い':'最速';}
+function pb(p){return '<div class='+'"pbar"><div class="pfill" style="width:'+p+'%"></div></div>';}
+function sk(sz){return '<button class='+'"spk" data-a="spk" style="width:'+(sz+16)+'px;height:'+(sz+16)+'px;font-size:'+sz+'px">🔊</button>';}
+function render(){
+var h='',app=document.getElementById('app');
+try{
+if(S.mode==='menu')h=mMenu();
+else if(S.mode==='flash')h=mFlash();
+else if(S.mode==='done')h=mDone();
+else if(S.mode==='quiz')h=mQuiz();
+else if(S.mode==='mistakes')h=mMistakes();
+else if(S.mode==='result')h=mResult();
+else if(S.mode==='review')h=mReview();
+}catch(ex){h='<p style='+'"color:#f66;padding:20px">'+esc(ex.message)+'</p>';}
+if(app)app.innerHTML=h;
+}
+function mMenu(){
+var f=filt(),r=rf(),t=rt();
+var cats=S.dt==='phrases'?C77:S.dt==='vocab'?CV:S.dt==='numbers'?CN:S.dt==='school'?CS:null;
+var h='<div class="hdr"><div class="flag">🇷🇺</div>'+'<div class="title">'+'РУССКИЙ'+'</div><p class="sub1">'+'ロシア語暗記トレーナー'+'</p><p class="sub2">'+'対象: '+f.length+'項目</p></div>';
+h+='<div class="sec"><p class="lbl">学習セット</p><div class="deck-row">';
+DK.forEach(function(d){
+h+='<button class="dk'+(S.dt===d.k?' on':'')+'" data-a="setDT" data-v="'+d.k+'"><span class="ico">'+d.i+'</span><span>'+esc(d.l)+'</span></button>';
+});
+h+='</div></div>';
+if(cats){
+h+='<div class="sec"><p class="lbl">カテゴリ</p><div class="cat-row">';
+cats.forEach(function(c){
+h+='<button class="cb'+(S.cat===c?' on':'')+'" data-a="setCat" data-v="'+esc(c)+'">'+esc(c)+'</button>';
+});
+h+='</div></div>';
+}
+if(S.dt==='phrases'){
+h+='<div class="sec"><p class="lbl">番号範囲</p><div class="cat-row">';
+PR.forEach(function(p){
+var on=r===p.f&&t===p.t;
+h+='<button class="cb'+(on?' on':'')+'" data-a="setPR" data-f="'+p.f+'" data-t="'+p.t+'">'+esc(p.l)+'</button>';
+});
+h+='</div><div class="range-wrap"><div class="rbox"><span>から</span><input class="ri" type="number" min="1" max="77" value="'+esc(S.rf)+'" data-a="setRF"></div>';
+h+='<span style="color:#444;font-size:18px;padding:0 4px">—</span>';
+h+='<div class="rbox"><span>まで</span><input class="ri" type="number" min="1" max="77" value="'+esc(S.rt)+'" data-a="setRT"></div>';
+h+='<span class="rcount">→ '+f.length+'問</span></div></div>';
+}
+h+='<div style="display:flex;gap:16px;margin-top:18px">';
+h+='<div class="tog-row"><p class="lbl">シャッフル</p><button class="tog '+(S.sh?'on':'off')+'" data-a="togSH">'+(S.sh?'ON':'OFF')+'</button></div>';
+h+='<div class="tog-row"><p class="lbl">カタカナ</p><button class="tog '+(S.sr?'on':'off')+'" data-a="togSR">'+(S.sr?'ON':'OFF')+'</button></div>';
+h+='</div>';
+h+='<div class="sec"><p class="lbl">🔊 スピード：<span id="sl" style="color:#e63946;margin-left:4px">'+spd(S.rate)+'</span><span id="sv" style="color:#555;margin-left:4px;font-size:10px">('+S.rate+'x)</span></p>';
+h+='<div class="slider-row"><span>遅</span><input type="range" class="slider" min="0.3" max="1.5" step="0.1" value="'+S.rate+'" data-a="setRate"><span>速</span></div></div>';
+h+='<div class="mode-grid">';
+h+='<div class="panel"><div class="ptitle"><span class="ico">🃏</span>フラッシュカード</div><div class="dir-row"><button class="db" style="background:#e63946;margin-right:6px" data-a="stFlash" data-d="ru2ja">ロ→日</button><button class="db" style="background:#c1121f" data-a="stFlash" data-d="ja2ru">日→ロ</button></div><div class="dir-row" style="margin-top:6px"><button class="db" style="background:#6d3a8a;margin-right:6px;font-size:10px" data-a="stRand10" data-d="ru2ja">🎲 ランダム10問 露→日</button><button class="db" style="background:#4a2060;font-size:10px" data-a="stRand10" data-d="ja2ru">🎲 ランダム10問 日→露</button></div></div>';
+h+='<div class="panel"><div class="ptitle"><span class="ico">🎯</span>クイズ</div><div class="dir-row"><button class="db" style="background:#2a9d8f;margin-right:6px" data-a="stQuiz" data-q="ru2ja">ロ→日</button><button class="db" style="background:#218477" data-a="stQuiz" data-q="ja2ru">日→ロ</button></div></div>';
+h+='<button class="list-btn" data-a="goRev"><span style="font-size:19px">📋</span>一覧を見る</button>';
+h+='<button class="list-btn mis-btn" data-a="goMis" style="border-color:#f4a261;background:rgba(244,162,97,.08)"><span style="font-size:19px">⚠️</span>苦手リスト <span class="mis-cnt">'+(S.mistakes.length>0?'('+S.mistakes.length+'語)':'なし')+'</span></button>';
+h+='</div>';
+h+='<div class="prog-sec"><p class="lbl">習得済み: <strong style="color:#e63946">'+S.known.length+'</strong> / '+TOT+'</p>'+pb(S.known.length/TOT*100)+'</div>';
+return h;
+}
+function mFlash(){
+var c=S.deck[S.idx];if(!c)return '';
+var p=(S.idx+1)/S.deck.length*100,inner='';
+if(!S.flip){
+if(S.fd==='ru2ja')
+inner='<p class="cnum">#'+esc(String(c.id))+'</p>'+'<p class="cru">'+disp(c)+'</p>'+(S.sr&&c.read?'<p class="cread">'+esc(c.read)+'</p>':'')+sk(12)+'<p class="chint">タップして日本語を確認</p>';
+else
+inner='<p class="cnum">#'+esc(String(c.id))+'</p>'+'<p class="cja">'+esc(c.ja)+'</p>'+sk(12)+'<p class="chint">タップしてロシア語を確認</p>';
+}else{
+if(S.fd==='ru2ja')
+inner='<p class="cja">'+esc(c.ja)+'</p>'+'<p class="cru-sm">'+disp(c)+'</p>'+sk(16);
+else
+inner='<p class="cru">'+disp(c)+'</p>'+(S.sr&&c.read?'<p class="cread">'+esc(c.read)+'</p>':'')+sk(16);
+}
+var h='<div class="top-bar"><button class="back" data-a="goMenu">← 戻る</button><span class="cnt">'+(S.idx+1)+' / '+S.deck.length+'</span><span class="tag">'+(S.fd==='ru2ja'?'ロ→日':'日→ロ')+'</span></div>'+pb(p);
+h+='<div class="card'+(S.flip?' fl':'')+'" data-a="flip">'+inner+'</div>';
+if(S.flip)h+='<div class="btn-row"><button class="br bRed" data-a="skip">もう一度</button><button class="br bGrn" data-a="known">覚えた ✓</button></div>';
+else h+='<button class="bSkip" data-a="skip">スキップ →</button>';
+return h;
+}
+function mDone(){return '<div class="res"><p class="remo">🎉</p><h2 class="rtitle">完了！</h2><p style="color:#aaa">習得済み: '+S.known.length+' / '+S.deck.length+'</p><button class="wbtn bGrn" data-a="goMenu" style="margin-top:10px">メニューへ</button><button class="wbtn bRed" data-a="redo" style="margin-top:8px">もう一度</button></div>';}
+function mQuiz(){
+if(!S.qQ)return '';
+var q=S.qQ,c=q.correct,p=S.idx/S.deck.length*100;
+var h='<div class="top-bar"><button class="back" data-a="goMenu">← 戻る</button><span class="cnt">'+(S.idx+1)+' / '+S.deck.length+'</span><span class="stag">✓ '+S.sc.c+'</span></div>'+pb(p);
+h+='<div class="qcard"><p class="qlbl">'+(S.qm==='ru2ja'?'日本語は？':'ロシア語は？')+'</p><p class="qq">'+(S.qm==='ru2ja'?disp(c):esc(c.ja))+'</p>';
+if(S.qm==='ru2ja'&&S.sr&&c.read)h+='<p class="cread">'+esc(c.read)+'</p>';
+if(S.qm==='ru2ja')h+=sk(16);
+h+='</div><div class="cgrid">';
+q.choices.forEach(function(ch){
+var cls='ch';
+if(S.qA!==null){if(String(ch.id)===String(c.id))cls+=' ok';else if(String(ch.id)===String(S.qA))cls+=' ng';}
+h+='<button class="'+cls+'" data-a="ans" data-id="'+esc(String(ch.id))+'">'+esc(S.qm==='ru2ja'?ch.ja:ch.ru)+'</button>';
+});
+return h+'</div>';
+}
+function mResult(){
+var p=S.sc.t>0?Math.round(S.sc.c/S.sc.t*100):0;
+var em=S.sc.c===S.sc.t?'🏆':S.sc.c>=S.sc.t*0.7?'👏':'💪';
+var h='<div class="res"><p class="remo">'+em+'</p><h2 class="rtitle">結果</h2><p class="rscore">'+S.sc.c+'<span style="font-size:24px"> / '+S.sc.t+'</span></p><p class="rpct">'+p+'%</p>';
+if(S.rev.length>0){h+='<div class="rvbox"><p class="rvtitle">要復習 ('+S.rev.length+')</p>';S.rev.forEach(function(r){h+='<div class="rvi"><p>'+disp(r)+'</p><p>'+esc(r.ja)+'</p></div>';});h+='</div>';}
+return h+'<button class="wbtn bGrn" data-a="goMenu" style="margin-top:10px">メニューへ</button></div>';
+}
+function mMistakes(){
+var h='<div class="top-bar"><button class="back" data-a="goMenu">← 戻る</button><span class="cnt">苦手リスト</span></div>';
+if(S.mistakes.length===0){return h+'<div style="text-align:center;padding:40px;color:#555">間違えた語句がここに保存されます</div>';}
+h+='<div style="display:flex;gap:8px;margin-bottom:12px">';
+h+='<button class="db" style="flex:1;padding:10px;background:#e63946" data-a="stMisFlash" data-fd="ru2ja">🃏 露→日</button>';
+h+='<button class="db" style="flex:1;padding:10px;background:#c0392b" data-a="stMisFlash" data-fd="ja2ru">🃏 日→露</button>';
+h+='<button class="db" style="flex:1;padding:10px;background:#2a9d8f" data-a="stMisQuiz">🎯 クイズ</button>';
+h+='<button class="db" style="flex:1;padding:10px;background:#333;border:1px solid #555" data-a="clearMis">🗑 リセット</button>';
+h+='</div><div class="llist">';
+S.mistakes.forEach(function(p){
+h+='<div class="li"><div class="lih"><span class="licat">'+(p.cat||'')+'</span><div style="display:flex;align-items:center;gap:6px">';
+h+='<button class="spk" data-a="spkItem" data-ru="'+esc(p.ru)+'" style="width:29px;height:29px;font-size:13px">🔊</button>';
+h+='<button style="background:rgba(244,162,97,.2);border:1px solid #f4a261;color:#f4a261;border-radius:4px;padding:2px 8px;font-size:10px;cursor:pointer" data-a="delMis" data-id="'+esc(String(p.id))+'" data-ru="'+esc(p.ru)+'">削除</button>';
+h+='</div></div>';
+h+='<p class="liru">'+disp(p)+'</p>'+(S.sr&&p.read?'<p class="liread">'+esc(p.read)+'</p>':'')+'<p class="lija">'+esc(p.ja)+'</p></div>';
+});
+return h+'</div>';
+}
+function mReview(){
+var f=filt(),dk=null;DK.forEach(function(d){if(d.k===S.dt)dk=d;});
+var h='<div class="top-bar"><button class="back" data-a="goMenu">← 戻る</button><span class="cnt">'+(dk?esc(dk.l):'')+'一覧</span></div>'+'<div class="llist">';
+f.forEach(function(p){
+h+='<div class="li"><div class="lih"><span class="licat">'+esc(p.cat||'')+'</span><div style="display:flex;align-items:center;gap:6px"><button class="spk" data-a="spkItem" data-ru="'+esc(p.ru)+'" style="width:29px;height:29px;font-size:13px">🔊</button><span class="liid">#'+esc(String(p.id))+'</span></div></div>'+'<p class="liru">'+disp(p)+'</p>'+(S.sr&&p.read?'<p class="liread">'+esc(p.read)+'</p>':'')+'<p class="lija">'+esc(p.ja)+'</p></div>';
+});
+return h+'</div>';
+}
+function stFlash(dir){S.fd=dir;var f=filt();S.deck=S.sh?shuf(f):f.slice();S.idx=0;S.flip=false;S.mode='flash';render();}
+function stQuiz(qm){S.qm=qm;var f=filt();S.deck=S.sh?shuf(f):f.slice();S.idx=0;S.sc={c:0,t:0};S.rev=[];S.qA=null;makeQ(0);S.mode='quiz';render();}
+function makeQ(i){
+if(i>=S.deck.length){S.mode='result';render();return;}
+var correct=S.deck[i],pl=pool(),others=shuf(pl.filter(function(p){return String(p.id)!==String(correct.id);})).slice(0,3);
+S.qQ={correct:correct,choices:shuf([correct].concat(others))};S.qA=null;
+}
+function ans(idStr){
+if(S.qA!==null)return;
+var q=S.qQ,chosen=null;
+q.choices.forEach(function(c){if(String(c.id)===idStr)chosen=c;});
+if(!chosen)return;
+S.qA=String(chosen.id);
+var ok=String(chosen.id)===String(q.correct.id);
+S.sc.c+=ok?1:0;S.sc.t++;
+if(!ok){S.rev.push(q.correct);addMistake(q.correct);}
+render();
+var ci=S.idx;setTimeout(function(){S.idx=ci+1;makeQ(S.idx);render();},1200);
+}
+function skip(){if(S.flip)addMistake(S.deck[S.idx]);S.flip=false;if(S.idx+1>=S.deck.length){S.mode='done';render();return;}S.idx++;render();}
+function known(){var c=S.deck[S.idx];var id=c.id;if(S.known.indexOf(id)<0)S.known.push(id);removeMistake(id,c.ru);S.flip=false;if(S.idx+1>=S.deck.length){S.mode='done';render();return;}S.idx++;render();}
+function spk(t){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='ru-RU';u.rate=S.rate;window.speechSynthesis.speak(u);}
+document.body.addEventListener('click',function(e){
+var el=e.target;
+while(el&&el.tagName!=='BODY'){
+var a=el.getAttribute('data-a');
+if(!a){el=el.parentNode;continue;}
+if(a==='spk'){var c=S.deck[S.idx];if(c)spk(c.ru);}
+else if(a==='spkItem'){spk(el.getAttribute('data-ru')||'');}
+else if(a==='setDT'){S.dt=el.getAttribute('data-v');S.cat='すべて';render();}
+else if(a==='setCat'){S.cat=el.getAttribute('data-v');render();}
+else if(a==='setPR'){S.rf=el.getAttribute('data-f');S.rt=el.getAttribute('data-t');render();}
+else if(a==='togSH'){S.sh=!S.sh;render();}
+else if(a==='togSR'){S.sr=!S.sr;render();}
+else if(a==='stFlash'){stFlash(el.getAttribute('data-d'));}
+else if(a==='stQuiz'){stQuiz(el.getAttribute('data-q'));}
+else if(a==='goRev'){S.mode='review';render();}
+else if(a==='goMis'){S.mode='mistakes';render();}
+else if(a==='stRand10'){var fd=el.getAttribute('data-d')||'ru2ja';stFlash(fd);S.deck=S.deck.slice(0,10);S.mode='flash';render();}
+else if(a==='stMisFlash'){if(S.mistakes.length===0)return;S.fd=el.getAttribute('data-fd')||'ru2ja';S.deck=S.sh?shuf(S.mistakes.slice()):S.mistakes.slice();S.idx=0;S.flip=false;S.known=[];S.mode='flash';render();}
+else if(a==='stMisQuiz'){if(S.mistakes.length===0)return;S.deck=S.sh?shuf(S.mistakes.slice()):S.mistakes.slice();S.idx=0;S.qm='ru2ja';S.sc={c:0,t:0};S.rev=[];makeQ(0);S.mode='quiz';render();}
+else if(a==='clearMis'){if(confirm('苦手リストをリセットしますか？')){S.mistakes=[];saveMistakes();render();}}
+else if(a==='delMis'){removeMistake(el.getAttribute('data-id'),el.getAttribute('data-ru'));render();}
+else if(a==='goMenu'){S.mode='menu';render();}
+else if(a==='flip'){S.flip=!S.flip;render();}
+else if(a==='skip'){skip();}
+else if(a==='known'){known();}
+else if(a==='ans'){ans(el.getAttribute('data-id'));}
+else if(a==='redo'){stFlash(S.fd);}
+return;
+}
+});
+document.body.addEventListener('change',function(e){
+var a=e.target.getAttribute('data-a');
+if(a==='setRF'){S.rf=e.target.value;render();}
+else if(a==='setRT'){S.rt=e.target.value;render();}
+});
+document.body.addEventListener('input',function(e){
+var a=e.target.getAttribute('data-a');
+if(a==='setRate'){
+S.rate=parseFloat(e.target.value);
+var l=document.getElementById('sl'),v=document.getElementById('sv');
+if(l)l.textContent=spd(S.rate);if(v)v.textContent='('+S.rate+'x)';
+}
+});
+render();
+</script>
+
+</body>
+</html>
