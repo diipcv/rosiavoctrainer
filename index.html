@@ -338,13 +338,38 @@ var school=[
 {id:"s60",ru:"стол преподавателя",acc:"стол преподава́теля",read:"ストール プリパダヴァーチェリャ",ja:"先生の机",cat:"家具"},
 {id:"s61",ru:"карта России",acc:"ка́рта Росси́и",read:"カールタ ラシーイ",ja:"ロシアの地図",cat:"教材・道具"}
 ];
+var may25=[
+{id:"m1",ru:"посол",acc:"посо́л",read:"パソール",ja:"大使",cat:"場所"},
+{id:"m2",ru:"академия",acc:"акаде́мия",read:"アカジェーミヤ",ja:"大学校",cat:"場所"},
+{id:"m3",ru:"институт",acc:"институ́т",read:"インスチトゥート",ja:"研究所・学院",cat:"場所"},
+{id:"m4",ru:"больница",acc:"больни́ца",read:"バリニーツァ",ja:"病院",cat:"場所"},
+{id:"m5",ru:"фирма",acc:"фи́рма",read:"フィールマ",ja:"会社",cat:"場所"},
+{id:"m6",ru:"школа",acc:"шко́ла",read:"シュコーラ",ja:"学校",cat:"場所"},
+{id:"m7",ru:"банк",acc:"банк",read:"バンク",ja:"銀行",cat:"場所"},
+{id:"m8",ru:"завод",acc:"заво́д",read:"ザヴォート",ja:"工場",cat:"場所"},
+{id:"m9",ru:"почта",acc:"по́чта",read:"ポーチタ",ja:"郵便局",cat:"場所"},
+{id:"m10",ru:"посольство",acc:"посо́льство",read:"パソーリストヴァ",ja:"大使館",cat:"場所"},
+{id:"m11",ru:"полицейский",acc:"поли́цейский",read:"パリツェーイスキー",ja:"警察官",cat:"職業"},
+{id:"m12",ru:"врач",acc:"врач",read:"ヴラーチ",ja:"医者",cat:"職業"},
+{id:"m13",ru:"инженер",acc:"инжене́р",read:"インジェニェール",ja:"エンジニア",cat:"職業"},
+{id:"m14",ru:"шофёр",acc:"шофёр",read:"ショフョール",ja:"運転手",cat:"職業"},
+{id:"m15",ru:"переводчик",acc:"перево́дчик",read:"ピリヴォートチック",ja:"通訳・翻訳者",cat:"職業"},
+{id:"m16",ru:"гид",acc:"гид",read:"ギート",ja:"ガイド",cat:"職業"},
+{id:"m17",ru:"юрист",acc:"юри́ст",read:"ユーリスト",ja:"弁護士",cat:"職業"},
+{id:"m18",ru:"учитель",acc:"учи́тель",read:"ウチーチェリ",ja:"教師",cat:"職業"},
+{id:"m19",ru:"преподаватель",acc:"преподава́тель",read:"プリパダヴァーチェリ",ja:"講師",cat:"職業"},
+{id:"m20",ru:"секретарь",acc:"секрета́рь",read:"シクリタールィ",ja:"秘書",cat:"職業"},
+{id:"m21",ru:"журналист",acc:"журнали́ст",read:"ジュルナリースト",ja:"ジャーナリスト",cat:"職業"},
+{id:"m22",ru:"экономист",acc:"эконо́мист",read:"エカノーミスト",ja:"経済学者・エコノミスト",cat:"職業"}
+];
 var C77=['すべて','日常会話','旅行・移動','体・健康','感情・状況','ことわざ'];
 var CV=['すべて','月','曜日','人・家族'];
 var CN=['すべて','1〜20','十の位','組み合わせ例'];
 var CS=['すべて','教室・建物','家具','機材','教材・道具','人'];
-var DK=[{k:'phrases',l:'77文',i:'📖'},{k:'greetings',l:'日常挨拶',i:'👋'},{k:'vocab',l:'月・曜日・人',i:'📅'},{k:'numbers',l:'1〜100',i:'🔢'},{k:'school',l:'教室・学校',i:'🏫'}];
+var CM25=['すべて','場所','職業'];
+var DK=[{k:'phrases',l:'77文',i:'📖'},{k:'greetings',l:'日常挨拶',i:'👋'},{k:'vocab',l:'月・曜日・人',i:'📅'},{k:'numbers',l:'1〜100',i:'🔢'},{k:'school',l:'教室・学校',i:'🏫'},{k:'may25',l:'5/25 ダリ',i:'💼'}];
 var PR=[{l:'1〜35',f:1,t:35},{l:'36〜77',f:36,t:77},{l:'1〜77',f:1,t:77}];
-var TOT=phrases.length+greetings.length+vocab.length+numbers.length+school.length;
+var TOT=phrases.length+greetings.length+vocab.length+numbers.length+school.length+may25.length;
 var _mis=[];try{var _raw=localStorage.getItem('ruMistakes');if(_raw)_mis=JSON.parse(_raw);}catch(e){}
 var S={mode:'menu',dt:'phrases',cat:'すべて',sr:true,sh:true,rf:'1',rt:'77',deck:[],idx:0,flip:false,known:[],qQ:null,qA:null,sc:{c:0,t:0},qm:'ru2ja',fd:'ru2ja',rev:[],rate:0.5,mistakes:_mis};
 function saveMistakes(){try{localStorage.setItem('ruMistakes',JSON.stringify(S.mistakes));}catch(e){}}
@@ -355,8 +380,8 @@ function disp(c){var t=c.acc||c.ru,r='',i,ch;for(i=0;i<t.length;i++){ch=t[i];if(
 function shuf(a){var b=a.slice(),i=b.length,j,t;while(i--){j=Math.floor(Math.random()*(i+1));t=b[i];b[i]=b[j];b[j]=t;}return b;}
 function rf(){return Math.max(1,Math.min(parseInt(S.rf)||1,77));}
 function rt(){return Math.max(rf(),Math.min(parseInt(S.rt)||77,77));}
-function filt(){var f,r=rf(),t=rt();if(S.dt==='phrases'){f=S.cat==='すべて'?phrases:phrases.filter(function(p){return p.cat===S.cat;});return f.filter(function(p){return p.id>=r&&p.id<=t;});}if(S.dt==='greetings')return greetings;if(S.dt==='school'){return S.cat==='すべて'?school:school.filter(function(p){return p.cat===S.cat;});}var pool=S.dt==='numbers'?numbers:vocab;return S.cat==='すべて'?pool:pool.filter(function(p){return p.cat===S.cat;});}
-function pool(){return S.dt==='phrases'?phrases:S.dt==='greetings'?greetings:S.dt==='numbers'?numbers:S.dt==='school'?school:vocab;}
+function filt(){var f,r=rf(),t=rt();if(S.dt==='phrases'){f=S.cat==='すべて'?phrases:phrases.filter(function(p){return p.cat===S.cat;});return f.filter(function(p){return p.id>=r&&p.id<=t;});}if(S.dt==='greetings')return greetings;if(S.dt==='school'){return S.cat==='すべて'?school:school.filter(function(p){return p.cat===S.cat;});}if(S.dt==='may25'){return S.cat==='すべて'?may25:may25.filter(function(p){return p.cat===S.cat;});}var pool=S.dt==='numbers'?numbers:vocab;return S.cat==='すべて'?pool:pool.filter(function(p){return p.cat===S.cat;});}
+function pool(){return S.dt==='phrases'?phrases:S.dt==='greetings'?greetings:S.dt==='numbers'?numbers:S.dt==='school'?school:S.dt==='may25'?may25:vocab;}
 function spd(r){return r<=0.4?'超遅い':r<=0.6?'遅い':r<=0.9?'普通':r<=1.2?'速い':'最速';}
 function pb(p){return '<div class='+'"pbar"><div class="pfill" style="width:'+p+'%"></div></div>';}
 function sk(sz){return '<button class='+'"spk" data-a="spk" style="width:'+(sz+16)+'px;height:'+(sz+16)+'px;font-size:'+sz+'px">🔊</button>';}
@@ -375,7 +400,7 @@ if(app)app.innerHTML=h;
 }
 function mMenu(){
 var f=filt(),r=rf(),t=rt();
-var cats=S.dt==='phrases'?C77:S.dt==='vocab'?CV:S.dt==='numbers'?CN:S.dt==='school'?CS:null;
+var cats=S.dt==='phrases'?C77:S.dt==='vocab'?CV:S.dt==='numbers'?CN:S.dt==='school'?CS:S.dt==='may25'?CM25:null;
 var h='<div class="hdr"><div class="flag">🇷🇺</div>'+'<div class="title">'+'РУССКИЙ'+'</div><p class="sub1">'+'ロシア語暗記トレーナー'+'</p><p class="sub2">'+'対象: '+f.length+'項目</p></div>';
 h+='<div class="sec"><p class="lbl">学習セット</p><div class="deck-row">';
 DK.forEach(function(d){
